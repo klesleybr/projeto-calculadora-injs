@@ -1,3 +1,5 @@
+// Documentação: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
 class CalcController {
 
     constructor() {
@@ -9,6 +11,8 @@ class CalcController {
         this._locale = "pt-BR";
         this._currentDate;
         this._currentTime;
+
+        this.initButtonsEvents();
 
         this.initialize(); // Veja que métodos da classe também recebem this.
     }
@@ -22,7 +26,7 @@ class CalcController {
 
             this.setDisplayDateTime();
 
-        }, (1000));
+        }, (1000));    
 
     }
 
@@ -34,6 +38,31 @@ class CalcController {
             year: "numeric"
         });
         this.displayTime = this.currentDate.toLocaleTimeString(this._locale);
+
+    }
+
+    initButtonsEvents() {
+
+        // no querySelector, é obrigado o uso do # para ids
+
+        /**
+         * O querySelectorAll() retorna todos os elementos solicitados como parâmetro, enquanto o querySelector() comum
+         * retorna apenas o que ele encontra primeiro.
+         * 
+         * Faça a comparação usando o console.
+         */
+
+        let buttonsEl = document.querySelectorAll("#buttons > g, #parts > g"); 
+
+        // #buttons > g = selecione todos os filhos com tag <g> do id buttons
+
+        buttonsEl.forEach((btn, index) => {
+            
+            btn.addEventListener('click', e => {
+                console.log(btn.className.baseVal.replace("btn-", ""), index); // exibe o nome do botão e o índice
+            })
+
+        });
 
     }
 
